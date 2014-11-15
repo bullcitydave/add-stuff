@@ -39,13 +39,16 @@ $('form').append(listOutput);
 
 
 
-function calculateTotal() {
+var calculateTotal = function (event) {
 
   var inputs = $('input[name^=myinput]');
-  var inputValues= _.map(inputs, function(input) { return parseInt($(input).val()); });
+  var inputValues= _.map(inputs, function(input) {
+    return (isNaN(parseInt($(input).val())) ? 0 : parseInt($(input).val()))
+  });
   var total = _.reduce(inputValues, function(memo, inputValue) { return memo + inputValue; }, 0);
   $('p#total').html(total);
 
 }
 
-$('.btn-success').click(function() {calculateTotal(); });
+$('.btn-success').on("click", calculateTotal);
+$('input[name^=myinput]').on("blur", calculateTotal);
