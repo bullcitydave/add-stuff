@@ -58,7 +58,7 @@ $('form').append(listOutput);
 var calculateTotal = function (event) {
     var inputs = $('input[name^=myinput]');
     var inputValues= _.map(inputs, function(input) {
-      return (isNaN(parseFloat($(input).val())) ? 0 : parseFloat($(input).val()))
+        return (isNaN(parseFloat($(input).val())) ? 0 : parseFloat($(input).val()))
     });
     var total = _.reduce(inputValues, function(memo, inputValue) { return memo + inputValue; }, 0);
     $('p#total').html(parseFloat(total.toFixed(8)));
@@ -69,7 +69,24 @@ var resetInput = function (event) {
     $('p#total').html('0');
 };
 
+var prependRow = function (event) {
+    var inputLength = $('input[name^=myinput]').length;
+    $('form').prepend("<input type='number' name='myinput" + (inputLength+1) + "'>");
+    $('input[type=number]').eq(0).focus();
+}
+
+var appendRow = function (event) {
+    var inputLength = $('input[name^=myinput]').length;
+    $('form').append("<input type='number' name='myinput" + (inputLength+1) + "'>");
+    $('input[type=number]').eq(inputLength).focus();
+}
+
+
 
 
 $('.btn-success').on("click", resetInput);
-$('input[name^=myinput]').on("blur", calculateTotal);
+$(document).on('blur', 'input[name^=myinput]', calculateTotal);
+// $('input[name^=myinput]').on("blur", calculateTotal);
+
+$('.glyphicon-plus').eq(0).on("click", prependRow);
+$('.glyphicon-plus').eq(1).on("click", appendRow);
