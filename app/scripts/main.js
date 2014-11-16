@@ -39,22 +39,6 @@ $('form').append(listOutput);
 
 
 
-// var calculateTotal = function (event) {
-//
-//   var inputs = $('input[name^=myinput]');
-//   var inputValues= _.map(inputs, function(input) {
-//     return (isNaN(parseInt($(input).val())) ? 0 : parseInt($(input).val()))
-//   });
-//   var total = _.reduce(inputValues, function(memo, inputValue) { return memo + inputValue; }, 0);
-//   $('p#total').html(total);
-//
-// }
-//
-// $('.btn-success').on("click", calculateTotal);
-// $('input[name^=myinput]').on("blur", calculateTotal);
-
-
-
 var calculateTotal = function (event) {
     var inputs = $('input[name^=myinput]');
     var inputValues= _.map(inputs, function(input) {
@@ -67,19 +51,20 @@ var calculateTotal = function (event) {
 var resetInput = function (event) {
     $('input').val(null);
     $('p#total').html('0');
+    $('input[class="added"]').remove();
 };
 
 var prependRow = function (event) {
     event.preventDefault();
     var inputLength = $('input[name^=myinput]').length;
-    $('form').prepend("<input type='number' name='myinput" + (inputLength+1) + "'>");
+    $('form').prepend("<input type='number' class='added' name='myinput" + (inputLength+1) + "'>");
     $('input[type=number]').eq(0).focus();
 }
 
 var appendRow = function (event) {
     event.preventDefault();
     var inputLength = $('input[name^=myinput]').length;
-    $('form').append("<input type='number' name='myinput" + (inputLength+1) + "'>");
+    $('form').append("<input type='number' class='added' name='myinput" + (inputLength+1) + "'>");
     $('input[type=number]').eq(inputLength).focus();
 }
 
