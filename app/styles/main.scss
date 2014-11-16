@@ -1,5 +1,9 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
 
+$orange: darkorange;  // my
+
+$main-font: Questrial, Helvetica, Arial, sans-serif;
+
 // bower:scss
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 // endbower
@@ -99,8 +103,67 @@ body {
   }
 }
 
+
+input[type="number"] {
+  position: relative;
+  left: 20%;
+  border-left: 3px groove;
+  border-right: 3px groove;
+  padding: 4px 12px;
+  font-family: $main-font;
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
+  width: 60%;
+  text-align: right;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  color: #666;
+  min-width:160px;
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+input[type="number"]:first-child {
+  border-top: 3px groove;
+}
+
+input[type="number"]:last-child {
+  border-bottom: 3px groove;
+}
+
+input[type="number"]:focus {
+  outline-width: 2px;
+  outline-color: darkorange;
+  outline-style: solid;
+  outline-offset: 5px;
+}
+
+div#total-container {
+
+    text-align: center;
+    margin: 0 0 30px 0;
+
+    p#total {
+      font-size: 3.0em;
+      color: $orange;
+      font-weight: bold;
+      padding: 30px 0 0 0;
+      font-family: $main-font;
+      letter-spacing: 0.09em;
+    }
+
+    .btn-reset {
+      @extend .btn-success;
+      background: white;
+      color: $orange;
+      bottom: -50px;
+    }
+    .btn-reset:hover {
+      background: $orange;
+    }
+
 }

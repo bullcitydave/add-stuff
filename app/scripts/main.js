@@ -58,10 +58,10 @@ $('form').append(listOutput);
 var calculateTotal = function (event) {
     var inputs = $('input[name^=myinput]');
     var inputValues= _.map(inputs, function(input) {
-      return (isNaN(parseInt($(input).val())) ? 0 : parseInt($(input).val()))
+      return (isNaN(parseFloat($(input).val())) ? 0 : parseFloat($(input).val()))
     });
     var total = _.reduce(inputValues, function(memo, inputValue) { return memo + inputValue; }, 0);
-    $('p#total').html(total);
+    $('p#total').html(parseFloat(total.toFixed(8)));
 };
 
 var resetInput = function (event) {
