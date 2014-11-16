@@ -3,6 +3,9 @@
 
 var gulp = require('gulp');
 
+var prompt = require('gulp-prompt');
+var exec = require('child_process').exec;
+
 // load plugins
 var $ = require('gulp-load-plugins')();
 
