@@ -70,12 +70,14 @@ var resetInput = function (event) {
 };
 
 var prependRow = function (event) {
+    event.preventDefault();
     var inputLength = $('input[name^=myinput]').length;
     $('form').prepend("<input type='number' name='myinput" + (inputLength+1) + "'>");
     $('input[type=number]').eq(0).focus();
 }
 
 var appendRow = function (event) {
+    event.preventDefault();
     var inputLength = $('input[name^=myinput]').length;
     $('form').append("<input type='number' name='myinput" + (inputLength+1) + "'>");
     $('input[type=number]').eq(inputLength).focus();
@@ -85,8 +87,19 @@ var appendRow = function (event) {
 
 
 $('.btn-success').on("click", resetInput);
+
 $(document).on('blur', 'input[name^=myinput]', calculateTotal);
-// $('input[name^=myinput]').on("blur", calculateTotal);
+
+// disable mousewheel on a input number field when in focus
+// (to prevent Cromium browsers change the value when scrolling)
+$('form').on('focus', 'input[type=number]', function (e) {
+  $(this).on('mousewheel.disableScroll', function (e) {
+    e.preventDefault()
+  })
+})
+$('form').on('blur', 'input[type=number]', function (e) {
+  $(this).off('mousewheel.disableScroll')
+})
 
 $('.glyphicon-plus').eq(0).on("click", prependRow);
 $('.glyphicon-plus').eq(1).on("click", appendRow);
